@@ -1,1 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  background: url("https://www.transparenttextures.com/patterns/white-wall-3.png");
+  background-color: #f4faff;
+  color: #333;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 15px 20px;
+}
+
+.border-primary{
+  border: 2px solid #5cceff;
+  border-radius: 10px;
+}
+
+.border-secondary{
+  border: 2px solid #1754fb82;
+  border-radius: 10px;
+}
+
+
+.btn {
+  padding: 15px 100px;
+  font-family: sans-serif;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: #000;
+  -webkit-transform: scaleY(0.3);
+  transform: scaleY(0.3);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  color: white;
+}
+
+.btn:hover::before {
+  box-shadow: 5px 5px 15px rgb(65, 65, 65);
+  opacity: 1;
+  border-radius: 10px;
+  background: #5CCEFF;
+  background: linear-gradient(90deg, rgba(92, 206, 255, 1) 0%, rgba(18, 26, 255, 1) 100%);
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+  transition: -webkit-transform 0.6s cubic-bezier(0.08, 0.35, 0.13, 1.02),
+    opacity 0.4s;
+  transition: transform 0.6s cubic-bezier(0.08, 0.35, 0.13, 1.02), opacity;
+}

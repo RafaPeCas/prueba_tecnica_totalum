@@ -1,0 +1,9 @@
+<app-entity-table
+  [title]="'Pedidos'"
+  [tableName]="'pedido'"
+  [items]="orders"
+  [searchField]="'producto'"
+  [columns]="['numero_pedido', 'importe', 'importe_impuestos', 'cantidad_productos','fecha','producto']"
+  [editable]="true"
+
+></app-entity-table>

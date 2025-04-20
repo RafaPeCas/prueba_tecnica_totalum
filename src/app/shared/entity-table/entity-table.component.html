@@ -1,0 +1,84 @@
+<div class="table-container">
+    <h2>Tabla de {{title}}</h2>
+
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar..." class="search-input" />
+    <!-- Modal -->
+    <div class="modal-overlay" *ngIf="showModal">
+        <div class="modal">
+            <h2>Añadir {{title}}</h2>
+            <form (ngSubmit)="addItem(newItem)">
+                <div *ngFor="let column of columns" class="modal-item">
+                    <label [for]="column">{{column}}:</label>
+                    <input class="modal-input" [(ngModel)]="newItem[column]" [type]="getInputType(column)" name="{{column}}"
+                        placeholder="{{column}}" required />
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-delete" (click)="showModal = false">Cancelar</button>
+                    <button class="btn-save" type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <table class="entity-table">
+        <thead>
+            <tr>
+                <th *ngFor="let column of columns">{{ column | titlecase }}</th>
+                <th *ngIf="editable">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of filteredItems()">
+                <!-- Vista normal -->
+                <ng-container *ngIf="editingId !== item._id">
+                    <td *ngFor="let column of columns">
+                        <ng-container *ngIf="column.toLowerCase().includes('fecha'); else noDate">
+                            {{ item[column] | date:'dd/MM/yyyy' }}
+                        </ng-container>
+                        <ng-template #noDate>
+                            {{ item[column] }}
+                        </ng-template>
+                    </td>
+                    <td *ngIf="editable">
+                        <button (click)="startEdit(item)">Editar</button>
+                        <button class="btn-delete" (click)="deleteItem(item._id)">Borrar</button>
+                    </td>
+                </ng-container>
+
+                <!-- Modo edición -->
+                <ng-container *ngIf="editingId === item._id">
+                    <td *ngFor="let column of columns">
+                      <ng-container *ngIf="column.toLowerCase().includes('fecha'); else normalInput">
+                        <input
+                          type="date"
+                          [(ngModel)]="editedItem[column]"
+                          [name]="column"
+                        />
+                      </ng-container>
+                      <ng-template #normalInput>
+                        <input
+                          type="text"
+                          [(ngModel)]="editedItem[column]"
+                          placeholder="{{column}}..."
+                          [name]="column"
+                        />
+                      </ng-template>
+                    </td>
+                    <td>
+                      <button class="btn-save" (click)="saveEdit()">Guardar</button>
+                      <button class="btn-delete" (click)="cancelEdit()">Cancelar</button>
+                    </td>
+                  </ng-container>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Paginación -->
+    <div class="pagination">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+        <span>Página {{ currentPage }} de {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+    </div>
+
+    <button (click)="showModal = true">Crear {{title}}</button>
+</div>
