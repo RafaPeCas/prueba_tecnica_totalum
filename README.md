@@ -23,6 +23,8 @@ Este proyecto es una prueba técnica desarrollada para Totalum. Consiste en una 
 ng serve
 ```
 
+4. Poner la API key dentro de la variable de entorno *totalumApiKey* que se encuentra dentro de: *src/enviroments/enviroments.prod.ts*. Lay key está adjunta al correo de inscripción.
+
 Luego abre tu navegador en: [http://localhost:4200](http://localhost:4200)
 
 ## Componente Principal: `EntityTableComponent`
@@ -76,11 +78,30 @@ Cualquier columna que incluya la palabra `"fecha"` automáticamente:
 
 ---
 
+## Pipe Personalizado: `centToEuro`
+
+Este pipe se utiliza para **formatear valores monetarios almacenados en céntimos** y mostrarlos correctamente como euros con formato local (por ejemplo, `12345` se renderiza como `123,45 €`).
+
+He decicidido guardar los valores monetarios en números enteros en la base de datos, ya que son mucho más estables que los números flotantes.
+
+### Ubicación
+
+```bash
+src/app/shared/pipes/cent-to-euro.pipe.ts
+```
+
 ## Conexión a la Base de Datos: `totalum-api.service.ts`
 
 El servicio `TotalumApiService` actúa como puente entre el frontend Angular y la base de datos gestionada a través de la SDK de *Totalum API*.
 
 Contiene todos los métodos de las *CRUDS*, la paginación y el buscador, que vienen dados en la misma documentación de Totalum.
 
+La API se recoge de:
+```bash
+export const environment = {
+    production: true,
+    totalumApiKey: 'key'
+  };
+```
 ---
 

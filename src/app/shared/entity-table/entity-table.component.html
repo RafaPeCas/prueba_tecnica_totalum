@@ -9,8 +9,8 @@
             <form (ngSubmit)="addItem(newItem)">
                 <div *ngFor="let column of columns" class="modal-item">
                     <label [for]="column">{{column}}:</label>
-                    <input class="modal-input" [(ngModel)]="newItem[column]" [type]="getInputType(column)" name="{{column}}"
-                        placeholder="{{column}}" required />
+                    <input class="modal-input" [(ngModel)]="newItem[column]" [type]="getInputType(column)"
+                        name="{{column}}" placeholder="{{column}}" required />
                 </div>
                 <div class="modal-buttons">
                     <button type="button" class="btn-delete" (click)="showModal = false">Cancelar</button>
@@ -36,7 +36,13 @@
                             {{ item[column] | date:'dd/MM/yyyy' }}
                         </ng-container>
                         <ng-template #noDate>
-                            {{ item[column] }}
+                            <ng-container
+                                *ngIf="column.toLowerCase().includes('precio') || column.toLowerCase().includes('importe'); else plainValue">
+                                {{ item[column] | centToEuro }}
+                            </ng-container>
+                            <ng-template #plainValue>
+                                {{ item[column] }}
+                            </ng-template>
                         </ng-template>
                     </td>
                     <td *ngIf="editable">
@@ -48,27 +54,19 @@
                 <!-- Modo edición -->
                 <ng-container *ngIf="editingId === item._id">
                     <td *ngFor="let column of columns">
-                      <ng-container *ngIf="column.toLowerCase().includes('fecha'); else normalInput">
-                        <input
-                          type="date"
-                          [(ngModel)]="editedItem[column]"
-                          [name]="column"
-                        />
-                      </ng-container>
-                      <ng-template #normalInput>
-                        <input
-                          type="text"
-                          [(ngModel)]="editedItem[column]"
-                          placeholder="{{column}}..."
-                          [name]="column"
-                        />
-                      </ng-template>
+                        <ng-container *ngIf="column.toLowerCase().includes('fecha'); else normalInput">
+                            <input type="date" [(ngModel)]="editedItem[column]" [name]="column" />
+                        </ng-container>
+                        <ng-template #normalInput>
+                            <input type="text" [(ngModel)]="editedItem[column]" placeholder="{{column}}..."
+                                [name]="column" />
+                        </ng-template>
                     </td>
                     <td>
-                      <button class="btn-save" (click)="saveEdit()">Guardar</button>
-                      <button class="btn-delete" (click)="cancelEdit()">Cancelar</button>
+                        <button class="btn-save" (click)="saveEdit()">Guardar</button>
+                        <button class="btn-delete" (click)="cancelEdit()">Cancelar</button>
                     </td>
-                  </ng-container>
+                </ng-container>
             </tr>
         </tbody>
     </table>

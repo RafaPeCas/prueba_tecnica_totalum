@@ -1,11 +1,12 @@
 import { Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TotalumApiService } from '@app/totalum-api.service'; 
+import { TotalumApiService } from '@app/totalum-api.service';
+import { CentToEuroPipe } from '@app/shared/pipes/cent-to-euro.pipe';
 
 @Component({
   selector: 'app-entity-table',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CentToEuroPipe],
   templateUrl: './entity-table.component.html',
   styleUrls: ['./entity-table.component.css']
 })
