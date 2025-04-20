@@ -1,7 +1,7 @@
 import { Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TotalumApiService } from '../../totalum-api.service'; 
+import { TotalumApiService } from '@app/totalum-api.service'; 
 
 @Component({
   selector: 'app-entity-table',

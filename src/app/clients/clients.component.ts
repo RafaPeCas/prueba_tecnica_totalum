@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { EntityTableComponent } from '../shared/entity-table/entity-table.component';
+import { EntityTableComponent } from '@app/shared/entity-table/entity-table.component';
 
 @Component({
   selector: 'app-clients',
@@ -15,6 +15,4 @@ export class ClientsComponent {
     editingId: string | null = null;
     editedClient: any = {};
     newClient = { nombre: '', fecha_nacimiento: '', email: '', telefono: ''};
-
-  
 }

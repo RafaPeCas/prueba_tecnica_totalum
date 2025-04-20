@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AuthOptions, TotalumApiSdk } from 'totalum-api-sdk';
+import { environment } from "enviroments/enviroments..prod"
+
+const options: AuthOptions = {
+  apiKey: {
+    'api-key': environment.totalumApiKey
+  }
+};
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +18,7 @@ export class TotalumApiService {
   constructor() {
     const options: AuthOptions = {
       apiKey: {
-        'api-key': 'sk-eyJrZXkiOiI2NGViMDNhZGE3YjYyNWZmNDJiZDQ4OTciLCJuYW1lIjoiRGVmYXVsdCBBUEkgS2V5IGF1dG9nZW5lcmF0ZWQga2tsbiIsIm9yZ2FuaXphdGlvbklkIjoicmFmYWVsLXBydWViYS10ZWNuaWNhIn0_'
+        'api-key': environment.totalumApiKey
       },
     };
     this.client = new TotalumApiSdk(options);
