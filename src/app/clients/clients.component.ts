@@ -1,5 +1,4 @@
 import { Component} from '@angular/core';
-import { TotalumApiService } from '../totalum-api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EntityTableComponent } from '../shared/entity-table/entity-table.component';

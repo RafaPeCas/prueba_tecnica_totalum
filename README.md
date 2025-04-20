@@ -1,59 +1,86 @@
 # PruebaTecnicaTotalum
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+Este proyecto es una prueba técnica desarrollada para Totalum. Consiste en una aplicación web construida con **Angular** que permite gestionar entidades genéricas a través de un componente reutilizable que consume una API REST para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
 
-## Development server
+## Instalación y Ejecución
 
-To start a local development server, run:
+1. Clona el repositorio:
+
+```bash
+   git clone https://github.com/RafaPeCas/prueba_tecnica_totalum.git
+   cd prueba_tecnica_totalum
+```
+
+2. Instala las dependencias:
+
+```bash
+   npm install
+```
+
+3. Ejecuta la aplicación:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Luego abre tu navegador en: [http://localhost:4200](http://localhost:4200)
 
-## Code scaffolding
+## 🧠 Componente Principal: `EntityTableComponent`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Este componente está diseñado para ser reutilizable con cualquier entidad, permitiendo operaciones completas **CRUD** en una tabla editable con **paginación**, **búsqueda** y **creación vía modal**.
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 🎯 Inputs
 
-```bash
-ng generate --help
-```
+| Propiedad     | Tipo     | Descripción                                      |
+|---------------|----------|--------------------------------------------------|
+| `tableName`   | `string` | Nombre de la colección en la API                |
+| `title`       | `string` | Título que se muestra en el encabezado de la tabla |
+| `items`       | `any[]`  | Lista de elementos a mostrar                    |
+| `columns`     | `string[]` | Nombres de las columnas a renderizar           |
+| `editable`    | `boolean` | Indica si los registros pueden editarse o eliminarse |
+| `searchField` | `string` | Campo de búsqueda a usar dentro de la tabla     |
 
-## Building
+---
 
-To build the project run:
+### Funcionalidades
 
-```bash
-ng build
-```
+- Visualización de datos paginados.
+- Búsqueda dinámica sobre un campo especificado.
+- Edición en línea.
+- Creación de registros mediante modal.
+- Eliminación directa desde la tabla.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+### Métodos Principales
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- `loadItems()` → Carga los datos desde la API.
+- `addItem(newItem)` → Añade un nuevo registro.
+- `updateItem(item)` → Actualiza un registro.
+- `deleteItem(id)` → Elimina un registro.
+- `filteredItems()` → Devuelve los datos filtrados según `searchQuery`.
+- `getInputType(column)` → Determina el tipo de input (`text` o `date`).
+- `nextPage()` / `previousPage()` → Control de paginación.
+- `saveEdit()` / `cancelEdit()` → Control del modo de edición.
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+### Formato de Fechas
 
-For end-to-end (e2e) testing, run:
+Cualquier columna que incluya la palabra `"fecha"` automáticamente:
 
-```bash
-ng e2e
-```
+- Se muestra con formato `dd/MM/yyyy`.
+- Se edita mediante un `<input type="date">`.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Conexión a la Base de Datos: `totalum-api.service.ts`
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+El servicio `TotalumApiService` actúa como puente entre el frontend Angular y la base de datos gestionada a través de la SDK de *Totalum API*.
+
+Contiene todos los métodos de las *CRUDS*, la paginación y el buscador, que vienen dados en la misma documentación de Totalum.
+
+---
+
