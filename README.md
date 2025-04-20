@@ -25,13 +25,13 @@ ng serve
 
 Luego abre tu navegador en: [http://localhost:4200](http://localhost:4200)
 
-## 🧠 Componente Principal: `EntityTableComponent`
+## Componente Principal: `EntityTableComponent`
 
 Este componente está diseñado para ser reutilizable con cualquier entidad, permitiendo operaciones completas **CRUD** en una tabla editable con **paginación**, **búsqueda** y **creación vía modal**.
 
 ---
 
-### 🎯 Inputs
+### Inputs
 
 | Propiedad     | Tipo     | Descripción                                      |
 |---------------|----------|--------------------------------------------------|
