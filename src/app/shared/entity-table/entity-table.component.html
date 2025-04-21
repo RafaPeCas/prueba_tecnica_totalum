@@ -1,4 +1,14 @@
-<div class="table-container">
+<div *ngIf="loadError" class="error-message">
+    <h1>Error al cargar la API</h1>
+    <ul>
+        <li>Introduce la key de la API en <b>src/enviroments/enviroments.ts</b></li>
+        <li>La key está adjunta en el correo electrónico</li>
+        <li>En caso de extravío, el Totalum es <b>rafael-prueba-tecnica</b></li>
+        <li>En otro caso, compruebe la documentación <a href="/documentacion">Aquí</a> o pongase en contacto conmigo <a href="/">Aquí</a></li>
+    </ul>
+</div>
+
+<div *ngIf="loadError === false" class="table-container">
     <h2>Tabla de {{title}}</h2>
 
     <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar..." class="search-input" />
@@ -80,3 +90,4 @@
 
     <button (click)="showModal = true">Crear {{title}}</button>
 </div>
+

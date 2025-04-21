@@ -18,6 +18,7 @@ export class EntityTableComponent {
   @Input() editable: boolean = false;
   @Input() searchField: string = ""
 
+  loadError: boolean = false;
 
   editingId: string | null = null;
   editedItem: any = {};
@@ -36,7 +37,13 @@ export class EntityTableComponent {
   }
 
   async loadItems() {
-    this.items = await this.totalumApiService.getItems(this.tableName);
+    try {
+      this.items = await this.totalumApiService.getItems(this.tableName);
+      this.loadError = false;
+    } catch (error) {
+      console.error("Error cargando datos desde la API:", error);
+      this.loadError = true;
+    }
   }
 
   async addItem(newItem: any) {

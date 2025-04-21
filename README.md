@@ -17,15 +17,15 @@ Este proyecto es una prueba técnica desarrollada para Totalum. Consiste en una 
    npm install
 ```
 
-3. Ejecuta la aplicación:
+3. Poner la API key dentro de la variable de entorno *totalumApiKey* que se encuentra dentro de: *src/enviroments/enviroments.ts*. Lay key está adjunta al correo de inscripción.
+
+4. Ejecuta la aplicación:
 
 ```bash
 ng serve
 ```
 
-4. Poner la API key dentro de la variable de entorno *totalumApiKey* que se encuentra dentro de: *src/enviroments/enviroments.prod.ts*. Lay key está adjunta al correo de inscripción.
-
-Luego abre tu navegador en: [http://localhost:4200](http://localhost:4200)
+Por último abre tu navegador en: [http://localhost:4200](http://localhost:4200)
 
 ## Componente Principal: `EntityTableComponent`
 
@@ -96,10 +96,10 @@ El servicio `TotalumApiService` actúa como puente entre el frontend Angular y l
 
 Contiene todos los métodos de las *CRUDS*, la paginación y el buscador, que vienen dados en la misma documentación de Totalum.
 
-La API se recoge de:
+La API se recoge en *src/enviroments/enviroments.ts*:
 ```bash
 export const environment = {
-    production: true,
+    production: false,
     totalumApiKey: 'key'
   };
 ```
